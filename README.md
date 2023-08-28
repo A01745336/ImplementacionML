@@ -32,3 +32,16 @@ Si deseas realizar predicciones personalizadas con el árbol construido:
 
 Crea una lista new_data_point que contenga las características para las cuales deseas hacer una predicción.
 Llama a la función predict(tree, new_data_point) pasando el árbol construido y la lista new_data_point.
+
+# Ejemplo proporcionado en el código
+1. El nodo raíz (Depth: 0) divide los datos en función de la característica 0 (índice 0) y utiliza un umbral de 8.25. Esta división crea dos ramas: valores mayores que 8.25 y valores menores o iguales a 8.25.
+
+2. En la rama izquierda (Depth: 1), donde los valores de la característica 0 son menores o iguales a 8.25, el nodo en Depth: 1 utiliza la característica 1 (índice 1) y un umbral de 4.75 para dividir los datos en dos ramas: valores mayores que 4.75 y valores menores o iguales a 4.75.
+
+3. En la primera rama de la rama izquierda (Depth: 2), donde los valores de la característica 1 son menores o iguales a 4.75, el nodo en Depth: 2 utiliza nuevamente la característica 0 y un umbral de 7.0 para dividir los datos en dos ramas. En este nivel, las hojas indican que los valores pertenecen a la clase 0 o 1 dependiendo de si hay más valores de una clase que de otra.
+
+4. En la segunda rama de la rama izquierda (Depth: 2), donde los valores de la característica 1 son mayores que 4.75, el nodo en Depth: 2 utiliza la característica 0 y un umbral de 6.5 para dividir los datos en dos ramas. Al igual que antes, las hojas indican las clases a las que pertenecen los valores.
+
+5. En la rama derecha (Depth: 1), donde los valores de la característica 0 son mayores que 8.25, el nodo en Depth: 1 tiene hojas que indican directamente las clases a las que pertenecen los valores.
+
+En resumen, el árbol de decisión toma decisiones basadas en características y umbrales para separar los datos en diferentes clases. Cuando haces una predicción para una nueva entrada, el árbol sigue estas decisiones y te proporciona una predicción basada en la ruta que sigue a través de las ramas del árbol.  Es importante señalar que debido a la construcción del árbol usar una mayor o menor cantidad de "Depth" puede alterar el resultado de la predicción esperada.  Los casos de ejemplo estan diseñados para que den las predicciones esperadas usando 3 depths

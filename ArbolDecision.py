@@ -85,15 +85,16 @@ def build_tree(X, y, depth=0, max_depth=None):
     # Crear un nodo temporal para mostrar la información en la impresión
     temp_node = TreeNode(feature_index=feature_index, threshold=threshold)
 
-    # Agregar esta línea para imprimir el contenido del árbol en cada nivel
-    if temp_node.value is not None:
-        print(" " * depth, "Depth: ", depth, "Feature: ",
-              temp_node.feature_index, "Threshold: ",
-              temp_node.threshold, "Value: ", temp_node.value)
-    else:
-        print(" " * depth, "Depth: ", depth, "Feature: ",
-              temp_node.feature_index, "Threshold: ",
-              temp_node.threshold)
+    # Agregar este bloque de código para imprimir el contenido del árbol en
+    # cada nivel
+    # if temp_node.value is not None:
+    #     print(" " * depth, "Depth: ", depth, "Feature: ",
+    #           temp_node.feature_index, "Threshold: ",
+    #           temp_node.threshold, "Value: ", temp_node.value)
+    # else:
+    #     print(" " * depth, "Depth: ", depth, "Feature: ",
+    #           temp_node.feature_index, "Threshold: ",
+    #           temp_node.threshold)
 
     left_subtree = build_tree(left_X, left_y, depth + 1, max_depth)
     right_subtree = build_tree(right_X, right_y, depth + 1, max_depth)
@@ -104,32 +105,19 @@ def build_tree(X, y, depth=0, max_depth=None):
 
 # Función para hacer predicciones con el árbol construido
 def predict(tree, x):
-    if tree.value is not None:
+    if tree.left is None and tree.right is None:
+        print("Leaf node reached. Value:", tree.value)
         return tree.value
     if x[tree.feature_index] <= tree.threshold:
+        print("Going left. Feature:", tree.feature_index, "Threshold:",
+              tree.threshold)
         return predict(tree.left, x)
     else:
+        print("Going right. Feature:", tree.feature_index, "Threshold:",
+              tree.threshold)
         return predict(tree.right, x)
 
 
-# Ejemplo de uso
-if __name__ == "__main__":
-    # Ejemplo de datos de entrada (características y etiquetas)
-    X = np.array([
-        [6.5, 4.5],
-        [4.5, 3.5],
-        [6.0, 5.0],
-        [8.0, 2.5],
-        [9.0, 6.0],
-        [4.0, 7.0]
-    ])
-    y = np.array([0, 0, 1, 1, 0, 1])
-
-    # Construir el árbol de decisión
-    tree = build_tree(X, y, max_depth=2)
-
-
-# Imprimir el árbol construido
 def print_tree(node, depth=0):
     if node is None:
         return
@@ -139,5 +127,40 @@ def print_tree(node, depth=0):
     print_tree(node.right, depth + 1)
 
 
-print("Árbol de Decisión:")
-print_tree(tree)
+# Ejemplo de uso
+if __name__ == "__main__":
+    # Ejemplo de datos de entrada (características y etiquetas)
+    X = np.array([
+                [6.5, 4.5],
+                [4.5, 3.5],
+                [6.0, 5.0],
+                [8.0, 2.5],
+                [9.0, 6.0],
+                [4.0, 7.0],
+                [7.0, 5.5],
+                [5.0, 6.5],
+                [3.0, 4.0],
+                [2.0, 5.0],
+                [7.5, 3.0],
+                [6.0, 8.0],
+                [8.5, 7.0],
+                [1.5, 4.5]
+                ])
+    y = np.array([0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0])
+
+    # Construir el árbol de decisión
+    tree = build_tree(X, y, max_depth=3)
+
+    # Ejemplo de nuevos datos de entrada (características)
+    # Si quiere agregar más predicciones, use el formato que se tiene
+    X_new = np.array([
+        [4.0, 3.5],
+        [7.0, 5.5],
+        [5.0, 10.0],
+        [7.1, 4.0]
+    ])
+
+    # Hacer predicciones utilizando el nuevo árbol construido
+    for i in range(len(X_new)):
+        prediction_new = predict(tree, X_new[i])
+        print("Predicción para la entrada", i+1, ":", prediction_new)

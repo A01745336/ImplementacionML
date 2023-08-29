@@ -72,59 +72,47 @@ def find_best_split(X, y):
 
 
 # Función para construir el árbol de decisión recursivamente
-def build_tree(X, y, depth=0, max_depth=None):
-    if depth == max_depth or len(set(y)) == 1:
-        # Crear un nodo hoja si se cumple la condición
+def build_tree(X, y, depth=0, max_depth=None, max_features=None):
+    if depth == max_depth or len(set(y)) == 1 or max_features == 0:
         value = max(set(y), key=y.count)
         return TreeNode(value=value)
 
     feature_index, threshold = find_best_split(X, y)
-    left_X, left_y, right_X, right_y = split_data(X, y, feature_index,
-                                                  threshold)
+    if feature_index is None or threshold is None:
+        value = max(set(y), key=y.count)
+        return TreeNode(value=value)
 
-    # Crear un nodo temporal para mostrar la información en la impresión
-    temp_node = TreeNode(feature_index=feature_index, threshold=threshold)
-
-    # Agregar este bloque de código para imprimir el contenido del árbol en
-    # cada nivel
-    # if temp_node.value is not None:
-    #     print(" " * depth, "Depth: ", depth, "Feature: ",
-    #           temp_node.feature_index, "Threshold: ",
-    #           temp_node.threshold, "Value: ", temp_node.value)
-    # else:
-    #     print(" " * depth, "Depth: ", depth, "Feature: ",
-    #           temp_node.feature_index, "Threshold: ",
-    #           temp_node.threshold)
-
-    left_subtree = build_tree(left_X, left_y, depth + 1, max_depth)
-    right_subtree = build_tree(right_X, right_y, depth + 1, max_depth)
+    left_X, left_y, right_X, right_y = split_data(X, y, feature_index, threshold)
+    left_subtree = build_tree(left_X, left_y, depth + 1, max_depth, max_features - 1)
+    right_subtree = build_tree(right_X, right_y, depth + 1, max_depth, max_features - 1)
 
     return TreeNode(feature_index=feature_index, threshold=threshold,
                     left=left_subtree, right=right_subtree)
 
 
+
 # Función para hacer predicciones con el árbol construido
 def predict(tree, x):
     if tree.left is None and tree.right is None:
-        print("Leaf node reached. Value:", tree.value)
+        # print("Leaf node reached. Value:", tree.value)
         return tree.value
     if x[tree.feature_index] <= tree.threshold:
-        print("Going left. Feature:", tree.feature_index, "Threshold:",
-              tree.threshold)
+        # print("Going left. Feature:", tree.feature_index, "Threshold:",
+        #      tree.threshold)
         return predict(tree.left, x)
     else:
-        print("Going right. Feature:", tree.feature_index, "Threshold:",
-              tree.threshold)
+        # print("Going right. Feature:", tree.feature_index, "Threshold:",
+        #      tree.threshold)
         return predict(tree.right, x)
 
 
-def print_tree(node, depth=0):
+""" def print_tree(node, depth=0):
     if node is None:
         return
     print(" " * depth, "Depth:", depth, "Feature:", node.feature_index,
           "Threshold:", node.threshold, "Value:", node.value)
     print_tree(node.left, depth + 1)
-    print_tree(node.right, depth + 1)
+    print_tree(node.right, depth + 1) """
 
 
 # Ejemplo de uso

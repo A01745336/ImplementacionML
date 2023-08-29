@@ -1,7 +1,7 @@
-## ImplementacionML
+# ImplementacionML
 Momento de Retroalimentación: Módulo 2 Implementación de una técnica de aprendizaje máquina sin el uso de un framework. (Portafolio Implementación)
 
-### Manual de Usuario: Árbol de Decisión Simple en Python
+# Manual de Usuario: Árbol de Decisión Simple en Python
 Este manual proporciona instrucciones sobre cómo usar el código para construir y evaluar un árbol de decisión simple en Python.
 
 # Requisitos Previos
@@ -50,11 +50,11 @@ En resumen, el árbol de decisión toma decisiones basadas en características y
 
 Para usar el ejemplo 2, es necesario tener este archivo junto con el archivo "AbolDecision.py" en la misma carpeta y correr unicamente el archivo "ejemplo2".  En este nuevo archivo, se proporciona un arbol diferente y una ofrma en la que el usuario pueda hacer las predicciones que quiera sin necesidad de modificar el codigo base.
 
-#### Manual de Usuario: Implementación de Random Forest en Python
+## Manual de Usuario: Implementación de Random Forest en Python
 
 Este manual proporciona instrucciones sobre cómo usar la implementación de Random Forest en Python para construir y evaluar un modelo de Random Forest en el conjunto de datos del Titanic.
 
-### Requisitos Previos
+# Requisitos Previos
 - Python 3.x instalado en tu computadora.
 - Las bibliotecas numpy, scikit-learn y seaborn instaladas. Puedes instalarlas utilizando el siguiente comando:
 

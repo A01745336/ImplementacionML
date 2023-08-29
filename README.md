@@ -66,7 +66,7 @@ pip install numpy scikit-learn seaborn
 Descarga el código proporcionado (`RandomForest.py` y `ArbolDecision.py`) y guárdalo en un archivo con extensión `.py`.
 
 ### Paso 2: Preparar los Datos
-En el archivo, se realiza el preprocesamiento de los datos del Titanic. Asegúrate de que el código esté cargando el conjunto de datos y realizando las transformaciones adecuadas.
+En el archivo `ejemploRandomForest2.py`, se realiza el preprocesamiento de los datos del Titanic. Asegúrate de que el código esté cargando el conjunto de datos y realizando las transformaciones adecuadas.
 
 ### Paso 3: Construir y Entrenar el Random Forest
 Ejecuta el archivo en tu entorno de Python. El código dividirá automáticamente los datos en conjuntos de entrenamiento y prueba utilizando la función `train_test_split`. Luego, construirá y entrenará el Random Forest utilizando los datos de entrenamiento y la clase `RandomForest`.
@@ -75,7 +75,7 @@ Ejecuta el archivo en tu entorno de Python. El código dividirá automáticament
 Después de entrenar el Random Forest, el código hará predicciones en el conjunto de prueba y calculará la precisión del modelo utilizando la función `accuracy_score`. La precisión del modelo en el conjunto de prueba se imprimirá en la pantalla.
 
 ### Paso 5: Experimentar con Hiperparámetros (Opcional)
-Dentro del archivo `RandomForest.py`, encontrarás la clase `RandomForest` que contiene varios hiperparámetros. Puedes ajustar estos hiperparámetros para experimentar con diferentes configuraciones del modelo. Algunos hiperparámetros clave incluyen:
+Dentro del archivo `RandomForest.py`, encontrarás la clase `RandomForest` que contiene varios hiperparámetros. Puedes ajustar estos hiperparámetros, en el archivo `ejemploRandomForest2.py`, para experimentar con diferentes configuraciones del modelo. Algunos hiperparámetros clave incluyen:
 - `num_trees`: Número de árboles en el bosque.
 - `max_depth`: Profundidad máxima de cada árbol.
 - `max_features`: Cantidad máxima de características consideradas en cada división.

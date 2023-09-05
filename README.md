@@ -85,7 +85,7 @@ Dentro del archivo `RandomForest.py`, encontrarás la clase `RandomForest` que c
 Observa la precisión del modelo en el conjunto de prueba y compárala con diferentes configuraciones de hiperparámetros. Si la precisión parece ser baja, considera ajustar los hiperparámetros o explorar técnicas de validación cruzada para una evaluación más exhaustiva.
 
 ### Nota
-Debido a la aleatoridad del modelo, puede llegar a suceder que en algunas corridas el modelo "empeore" su precisión, mientras que en otras mejore de manera drastica
+Debido a la aleatoridad del modelo, puede llegar a suceder que en algunas corridas el modelo "empeore" su precisión, mientras que en otras mejore de manera drastica.  Tambien es importante que para observar la generalización, se debe ir cerrando la matriz de confusion que se muestra, para asi continuar a la siguente prueba.
 
 ### Ejemplo Proporcionado
 El archivo de ejemplo proporcionado muestra cómo construir y entrenar un Random Forest en el conjunto de datos del Titanic. También realiza predicciones y calcula la precisión del modelo. Asegúrate de seguir los pasos anteriores y ajustar los hiperparámetros según sea necesario para mejorar el rendimiento del modelo en este conjunto de datos específico.

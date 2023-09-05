@@ -1,6 +1,7 @@
 from ArbolDecision import TreeNode, build_tree, predict
 import numpy as np
 from sklearn.metrics import accuracy_score
+from collections import Counter
 
 
 class RandomForest:
@@ -23,32 +24,45 @@ class RandomForest:
             X_train_subset = X_train_subset[random_indices]
             y_train_subset = y[random_indices]
 
+            # Construir un árbol de decisión usando tu implementación
             tree = build_tree(X_train_subset, y_train_subset, max_depth=self.max_depth, max_features=self.max_features)
+
             self.trees.append(tree)
 
             # Evaluar la precisión en el conjunto de entrenamiento
-            train_predictions = [self.predict(x, tree_idx=i) for x in X_train_subset]
+            train_predictions = [predict(tree, x) for x in X_train_subset]
             train_accuracy = accuracy_score(y_train_subset, train_predictions)
 
             # Calcular la mejora en la precisión
             improvement = train_accuracy - train_accuracy_prev
 
-            # Mostrar la información
-            print(f'Árbol {i+1} entrenado. Precisión en el conjunto de entrenamiento: {train_accuracy:.4f}')
-            print(f'Mejora del modelo: {improvement:.4f}')
+            # Mostrar la información (opcional)
+            # print(f'Árbol {i+1} entrenado. Precisión en el conjunto de entrenamiento: {train_accuracy:.4f}')
+            # print(f'Mejora del modelo: {improvement:.4f}')
 
             # Actualizar la precisión previa
-            train_accuracy_prev = train_accuracy
+            # train_accuracy_prev = train_accuracy
 
-    def predict(self, x, tree_idx=None):
-        predictions = []
-        for idx, tree in enumerate(self.trees):
-            if tree_idx is None or tree_idx == idx:
-                prediction = predict(tree, x)
-                predictions.append(prediction)
-        # Aplicar votación o promediado para combinar las predicciones
-        final_prediction = np.round(np.mean(predictions))
-        return final_prediction
+    def predict(self, X):
+        predictions = [self.predict_one(tree, x) for x, tree in zip(X, self.trees)]
+        return predictions
+
+    def predict_one(self, tree, x):
+        if tree is None:
+            # print("Árbol es None")
+            pass
+        if tree.left is None and tree.right is None:
+            # print("Es una hoja, valor:", tree.value)
+            return tree.value
+        # print("Comparando:", x[tree.feature_index], "con umbral:", tree.threshold)
+        if x[tree.feature_index] <= tree.threshold:
+            # print("Moviendo hacia la izquierda")
+            return self.predict_one(tree.left, x)
+        else:
+            # print("Moviendo hacia la derecha")
+            return self.predict_one(tree.right, x)
+
+
 
     def evaluate(self, X, y):
         predictions = [self.predict(x) for x in X]

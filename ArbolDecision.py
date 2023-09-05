@@ -89,21 +89,16 @@ def build_tree(X, y, depth=0, max_depth=None, max_features=None):
     return TreeNode(feature_index=feature_index, threshold=threshold,
                     left=left_subtree, right=right_subtree)
 
-
-
 # Función para hacer predicciones con el árbol construido
 def predict(tree, x):
     if tree.left is None and tree.right is None:
-        # print("Leaf node reached. Value:", tree.value)
         return tree.value
     if x[tree.feature_index] <= tree.threshold:
-        # print("Going left. Feature:", tree.feature_index, "Threshold:",
-        #      tree.threshold)
         return predict(tree.left, x)
     else:
-        # print("Going right. Feature:", tree.feature_index, "Threshold:",
-        #      tree.threshold)
         return predict(tree.right, x)
+
+
 
 
 """ def print_tree(node, depth=0):

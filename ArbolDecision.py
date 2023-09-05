@@ -111,7 +111,7 @@ def predict(tree, x):
 
 
 # Ejemplo de uso
-if __name__ == "__main__":
+""" if __name__ == "__main__":
     # Ejemplo de datos de entrada (características y etiquetas)
     X = np.array([
                 [6.5, 4.5],
@@ -147,3 +147,4 @@ if __name__ == "__main__":
     for i in range(len(X_new)):
         prediction_new = predict(tree, X_new[i])
         print("Predicción para la entrada", i+1, ":", prediction_new)
+ """

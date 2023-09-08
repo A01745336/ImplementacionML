@@ -9,6 +9,7 @@ from RandomForest import RandomForest
 from math import sqrt
 from sklearn.model_selection import KFold
 
+
 class RandomForestApp:
     def __init__(self, root):
         self.root = root
@@ -57,6 +58,10 @@ class RandomForestApp:
         for i, (train_idx, test_idx) in enumerate(kf.split(X)):
             X_train, X_test = X[train_idx], X[test_idx]
             y_train, y_test = y[train_idx], y[test_idx]
+            print("valores de entrenamiento")
+            print(X_train[:5])
+            print("clases de los valores de entrenamiento")
+            print(y_train[:5], "\n")
 
             self.textbox.insert(tk.END, f"Ejecución {i + 1}:\n")
 
@@ -92,6 +97,7 @@ class RandomForestApp:
         # Calcular la precisión promedio
         mean_accuracy = np.mean(accuracies)
         self.textbox.insert(tk.END, f"Precisión promedio de todas las ejecuciones: {mean_accuracy:.2f}\n")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
